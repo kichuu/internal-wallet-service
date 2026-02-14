@@ -13,6 +13,7 @@ export const pool = new Pool({
   password: config.DATABASE_PASSWORD,
   database: config.DATABASE_NAME,
   max: 20,
+  ssl: config.DATABASE_SSL ? { rejectUnauthorized: false } : false,
 });
 
 export const db = drizzle(pool, {

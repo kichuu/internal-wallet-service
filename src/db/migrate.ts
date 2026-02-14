@@ -10,6 +10,7 @@ async function main() {
     user: config.DATABASE_USER,
     password: config.DATABASE_PASSWORD,
     database: config.DATABASE_NAME,
+    ssl: config.DATABASE_SSL ? { rejectUnauthorized: false } : false,
   });
 
   const db = drizzle(pool);

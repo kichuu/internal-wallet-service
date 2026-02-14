@@ -10,6 +10,10 @@ const envSchema = z.object({
   DATABASE_USER: z.string().default("postgres"),
   DATABASE_PASSWORD: z.string().default("postgres"),
   DATABASE_NAME: z.string().default("wallet_db"),
+  DATABASE_SSL: z
+    .enum(["true", "false"])
+    .default("false")
+    .transform((v) => v === "true"),
 });
 
 export type EnvConfig = z.infer<typeof envSchema>;
