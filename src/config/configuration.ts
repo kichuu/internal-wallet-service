@@ -5,6 +5,7 @@ const envSchema = z.object({
   NODE_ENV: z
     .enum(["development", "production", "test"])
     .default("development"),
+  DATABASE_URL: z.string().optional(),
   DATABASE_HOST: z.string().default("localhost"),
   DATABASE_PORT: z.coerce.number().default(5432),
   DATABASE_USER: z.string().default("postgres"),

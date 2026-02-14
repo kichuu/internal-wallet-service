@@ -4,14 +4,18 @@ import { Pool } from "pg";
 import { config } from "../config/configuration";
 
 async function main() {
-  const pool = new Pool({
-    host: config.DATABASE_HOST,
-    port: config.DATABASE_PORT,
-    user: config.DATABASE_USER,
-    password: config.DATABASE_PASSWORD,
-    database: config.DATABASE_NAME,
-    ssl: config.DATABASE_SSL ? { rejectUnauthorized: false } : false,
-  });
+  const pool = new Pool(
+    config.DATABASE_URL
+      ? { connectionString: config.DATABASE_URL }
+      : {
+          host: config.DATABASE_HOST,
+          port: config.DATABASE_PORT,
+          user: config.DATABASE_USER,
+          password: config.DATABASE_PASSWORD,
+          database: config.DATABASE_NAME,
+          ssl: config.DATABASE_SSL ? { rejectUnauthorized: false } : false,
+        }
+  );
 
   const db = drizzle(pool);
 
